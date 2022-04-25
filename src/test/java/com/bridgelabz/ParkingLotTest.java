@@ -9,8 +9,9 @@ public class ParkingLotTest {
     public static ParkingLot parkingLot = new ParkingLot(vehicle);
 
 
-    /**UC1: Park Vehicle
-    Test Case 1 -Able to Park The vehicle in the Parking Lot.
+    /**
+     * UC1: Park Vehicle
+     * Test Case 1 -Able to Park The vehicle in the Parking Lot.
      */
     @Test
     public void givenVehicle_WhenPark_ShouldReturnTrue() {
@@ -27,8 +28,9 @@ public class ParkingLotTest {
         assertFalse(parkingStatus);
     }
 
-    /** UC2 : Unpark Vehicle
-     Test Case 3 - Able to Unpark the vehicle from the parking lot.
+    /**
+     * UC2 : Unpark Vehicle
+     * Test Case 3 - Able to Unpark the vehicle from the parking lot.
      */
     @Test
     public void givenVehicleIfParked_WhenUnParked_ShouldReturnTrue() {
@@ -36,8 +38,9 @@ public class ParkingLotTest {
         assertTrue(parkingStatus);
     }
 
-    /**UC3 : Put out the Full Sign
-    Test Case 4 - when the parking lot is full, put out the full sign.
+    /**
+     * UC3 : Put out the Full Sign
+     * Test Case 4 - when the parking lot is full, put out the full sign.
      */
     @Test
     public void givenParkingLot_IfFull_ShouldShowFullSign() {
@@ -53,5 +56,4 @@ public class ParkingLotTest {
         String parkingLotStatus = parkingLot.parkingLotStatus(null);
         assertEquals("Parking Available", parkingLotStatus);
     }
-
 }

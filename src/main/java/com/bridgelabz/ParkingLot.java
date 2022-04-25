@@ -43,4 +43,19 @@ public class ParkingLot {
         }
         return false;
     }
+
+    /**
+     * Method to check availability of the parking lot.
+     *
+     * @param vehicle - We are passing the String vehicle.
+     * @return - If the lot is FULL it will return "Lot is Full" or
+     * If there is no vehicle it will return "Parking Available".
+     */
+    public String parkingLotStatus(String vehicle) {
+        if (this.vehicle == vehicle) {
+            return "Lot is Full";
+        }
+        return "Parking Available";
+    }
 }
+
