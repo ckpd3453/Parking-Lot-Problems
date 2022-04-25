@@ -7,13 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParkingLotTest {
     public static ParkingLot parkingLot = new ParkingLot();
+    public static String vehicle = "Car";
 
     /*UC1: Park Vehicle
     Test Case 1 -Able to Park The vehicle in the Parking Lot
      */
     @Test
     public void givenVehicle_WhenPark_ShouldReturnTrue() {
-        String vehicle = "Car";
         boolean parkingStatus = parkingLot.parkVehicle(vehicle);
         assertTrue(parkingStatus);
     }
@@ -23,8 +23,16 @@ public class ParkingLotTest {
      */
     @Test
     public void givenVehicle_WhenAlreadyParked_ShouldReturnFalse(){
-        String vehicle = "Car";
         boolean parkingStatus = parkingLot.parkVehicle(vehicle);
         assertFalse(parkingStatus);
+    }
+
+    /* UC2 : Unpark Vehicle
+     Test Case 3 - Able to Unpark the vehicle from the parking lot.
+     */
+    @Test
+    public void givenVehicleIfParked_WhenUnParked_ShouldReturnTrue(){
+        boolean parkingStatus = parkingLot.unParkVehicle(vehicle);
+        assertTrue(parkingStatus);
     }
 }
