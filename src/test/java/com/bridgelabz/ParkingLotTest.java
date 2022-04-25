@@ -6,8 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParkingLotTest {
-    public static ParkingLot parkingLot = new ParkingLot();
     public static String vehicle = "Car";
+    public static ParkingLot parkingLot = new ParkingLot(vehicle);
+
 
     /*UC1: Park Vehicle
     Test Case 1 -Able to Park The vehicle in the Parking Lot
@@ -22,7 +23,7 @@ public class ParkingLotTest {
     Test Case 2 -Able to check weather vehicle is already parked or not
      */
     @Test
-    public void givenVehicle_WhenAlreadyParked_ShouldReturnFalse(){
+    public void givenVehicle_WhenAlreadyParked_ShouldReturnFalse() {
         boolean parkingStatus = parkingLot.parkVehicle(vehicle);
         assertFalse(parkingStatus);
     }
@@ -31,7 +32,7 @@ public class ParkingLotTest {
      Test Case 3 - Able to Unpark the vehicle from the parking lot.
      */
     @Test
-    public void givenVehicleIfParked_WhenUnParked_ShouldReturnTrue(){
+    public void givenVehicleIfParked_WhenUnParked_ShouldReturnTrue() {
         boolean parkingStatus = parkingLot.unParkVehicle(vehicle);
         assertTrue(parkingStatus);
     }
