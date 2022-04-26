@@ -63,11 +63,13 @@ public class ParkingLotTest {
      * Test Case 4 - When given different vehicle to unpark should return false.
      */
     @Test
-    public void givenVehicleIfParked_AndGivenDifferentVehicleToUnPark_ShouldReturnFalse() throws ParkingLotException {
-        parkingLot.parkVehicle(vehicle1);
-        parkingLot.unParkVehicle(vehicle2);
-        boolean parkingStatus = parkingLot.isUnParked();
-        assertFalse(parkingStatus);
+    public void givenVehicleIfParked_AndGivenDifferentVehicleToUnPark_ShouldThrowException() throws ParkingLotException {
+        try {
+            parkingLot.parkVehicle(vehicle1);
+            parkingLot.unParkVehicle(vehicle2);
+        } catch (ParkingLotException e) {
+            assertEquals("No Such Vehicle", e.message);
+        }
     }
 
     /*
@@ -130,12 +132,9 @@ public class ParkingLotTest {
      *  Test Case 9: When space available for parking should notify the owner to take in the full signal.
      */
     @Test
-    public void givenWhenSpaceAvailable_ShouldNotifyOwner_ToTakeInTheFullSign() {
-        try {
-            parkingLot.parkVehicle(vehicle1);
-            parkingLot.unParkVehicle(vehicle1);
-        } catch (ParkingLotException e) {
-            assertEquals("Parking Space Available", owner.getMessage());
-        }
+    public void givenWhenSpaceAvailable_ShouldNotifyOwner_ToTakeInTheFullSign() throws ParkingLotException {
+        parkingLot.parkVehicle(vehicle1);
+        parkingLot.unParkVehicle(vehicle1);
+        assertEquals("Parking Space Available", owner.getMessage());
     }
 }

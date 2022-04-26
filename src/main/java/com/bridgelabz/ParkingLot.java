@@ -14,7 +14,7 @@ public class ParkingLot {
      */
     public void parkVehicle(Object vehicle) throws ParkingLotException {
         if (this.vehicle != null) {
-            this.notifyToSystem();
+            this.notifyToSystem("Parking Lot Is Full");
             throw new ParkingLotException("Parking Lot Is Full");
         }
         this.vehicle = vehicle;
@@ -29,10 +29,13 @@ public class ParkingLot {
      * @throws ParkingLotException - If we are trying to unpark the different vehicle then it will throw the exception "No Such Vehicle"
      */
     public void unParkVehicle(Object vehicle) throws ParkingLotException {
-        if (vehicle != vehicle)
+        if (this.vehicle != vehicle) {
             throw new ParkingLotException("No Such Vehicle");
-        if (this.vehicle != null && this.vehicle.equals(vehicle))
+        }
+        if (this.vehicle != null && this.vehicle.equals(vehicle)) {
             this.vehicle = null;
+            this.notifyToSystem("Parking Space Available");
+        }
     }
 
     /**
@@ -57,10 +60,10 @@ public class ParkingLot {
     /**
      * Method To Update Message To The Concern Entities
      */
-    public void notifyToSystem() {
+    public void notifyToSystem(String message) {
         Owner owner = new Owner();
         AirportSecurity airportSecurity = new AirportSecurity();
-        owner.updateMessage("Parking Lot Is Full");
-        airportSecurity.updateMessage("Parking Lot Is Full");
+        owner.updateMessage(message);
+        airportSecurity.updateMessage(message);
     }
 }

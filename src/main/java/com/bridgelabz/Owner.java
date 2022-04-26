@@ -3,7 +3,7 @@ package com.bridgelabz;
 /**
  * Created Class Owner To Notify When The Parking Lot Is Full.
  */
-public class Owner {
+public class Owner{
     public static String message;
 
     //Method to update the message passed.
