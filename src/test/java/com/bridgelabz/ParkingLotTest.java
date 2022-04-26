@@ -125,4 +125,17 @@ public class ParkingLotTest {
             assertEquals("Parking Lot Is Full", airportSecurity.getMessage());
         }
     }
+
+    /*UC 5 : Notify the owner to take in Full sign.
+     *  Test Case 9: When space available for parking should notify the owner to take in the full signal.
+     */
+    @Test
+    public void givenWhenSpaceAvailable_ShouldNotifyOwner_ToTakeInTheFullSign() {
+        try {
+            parkingLot.parkVehicle(vehicle1);
+            parkingLot.unParkVehicle(vehicle1);
+        } catch (ParkingLotException e) {
+            assertEquals("Parking Space Available", owner.getMessage());
+        }
+    }
 }
