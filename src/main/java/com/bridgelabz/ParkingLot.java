@@ -2,7 +2,6 @@ package com.bridgelabz;
 
 public class ParkingLot {
     private Object vehicle = null;
-
     /**
      *  Method to park the Vehicle.
      *  If the parking lot is null then the object will be initialized to the local object vehicle.
@@ -13,8 +12,8 @@ public class ParkingLot {
      */
     public void parkVehicle(Object vehicle) throws ParkingLotException {
         if (this.vehicle != null)
-            throw new ParkingLotException("Parking Lot is Full");
-        this.vehicle = vehicle;
+            throw new ParkingLotException("Parking Lot Is Full");
+            this.vehicle = vehicle;
     }
 
     /**

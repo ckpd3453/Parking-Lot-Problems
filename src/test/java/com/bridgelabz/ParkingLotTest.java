@@ -10,6 +10,7 @@ public class ParkingLotTest {
     ParkingLot parkingLot = null;
     Object vehicle1 = null;
     Object vehicle2 = null;
+    Owner owner = null;
 
     //Setting up the objects.
     @BeforeEach
@@ -17,6 +18,7 @@ public class ParkingLotTest {
         parkingLot = new ParkingLot();
         vehicle1 = new Object();
         vehicle2 = new Object();
+        owner = new Owner();
     }
 
     /**
@@ -39,7 +41,7 @@ public class ParkingLotTest {
             parkingLot.parkVehicle(vehicle1);
             parkingLot.parkVehicle(vehicle2);
         } catch (ParkingLotException e) {
-            assertEquals("Parking Lot is Full", e.message);
+            assertEquals("Parking Lot Is Full", e.message);
         }
     }
 
@@ -91,7 +93,21 @@ public class ParkingLotTest {
             parkingLot.parkVehicle(vehicle2);
         } catch (ParkingLotException e) {
             System.out.println(e.message);
-            assertEquals("Parking Lot is Full", e.message);
+            assertEquals("Parking Lot Is Full", e.message);
+        }
+    }
+
+    /*
+     * Test case 7 : When the parking lot is full then Owner should be notified.
+     */
+    @Test
+    public void givenVehicleToPark_WhenOwner_ShouldInformInformLotFull(){
+        try {
+            parkingLot.addMonitor(owner);
+            parkingLot.parkVehicle(vehicle1);
+            parkingLot.parkVehicle(vehicle2);
+        } catch(ParkingLotException e) {
+            assertEquals("Parking Lot Is Full", owner.getMessage());
         }
     }
 }
