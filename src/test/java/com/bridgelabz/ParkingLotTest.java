@@ -1,59 +1,97 @@
 package com.bridgelabz;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
-    public static String vehicle = "Car";
-    public static ParkingLot parkingLot = new ParkingLot(vehicle);
 
+    ParkingLot parkingLot = null;
+    Object vehicle1 = null;
+    Object vehicle2 = null;
+
+    //Setting up the objects.
+    @BeforeEach
+    public void initilization() {
+        parkingLot = new ParkingLot();
+        vehicle1 = new Object();
+        vehicle2 = new Object();
+    }
 
     /**
      * UC1: Park Vehicle
      * Test Case 1 -Able to Park The vehicle in the Parking Lot.
      */
     @Test
-    public void givenVehicle_WhenPark_ShouldReturnTrue() {
-        boolean parkingStatus = parkingLot.parkVehicle(vehicle);
-        assertTrue(parkingStatus);
+    public void givenVehicle_WhenPark_ShouldReturnTrue() throws ParkingLotException {
+        parkingLot.parkVehicle(vehicle1);
+        boolean isParked = parkingLot.isParked(vehicle1);
+        assertTrue(isParked);
     }
 
     /*
     Test Case 2 -Able to check weather vehicle is already parked or not.
      */
     @Test
-    public void givenVehicle_WhenAlreadyParked_ShouldReturnFalse() {
-        boolean parkingStatus = parkingLot.parkVehicle(vehicle);
-        assertFalse(parkingStatus);
+    public void givenVehicle_WhenAlreadyParked_ShouldReturnFalse() throws ParkingLotException {
+        try {
+            parkingLot.parkVehicle(vehicle1);
+            parkingLot.parkVehicle(vehicle2);
+        } catch (ParkingLotException e) {
+            assertEquals("Parking Lot is Full", e.message);
+        }
     }
 
-    /**
+    /*
      * UC2 : Unpark Vehicle
      * Test Case 3 - Able to Unpark the vehicle from the parking lot.
      */
     @Test
-    public void givenVehicleIfParked_WhenUnParked_ShouldReturnTrue() {
-        boolean parkingStatus = parkingLot.unParkVehicle(vehicle);
-        assertTrue(parkingStatus);
+    public void givenVehicleIfParked_WhenUnParked_ShouldReturnTrue() throws ParkingLotException {
+        parkingLot.parkVehicle(vehicle1);
+        parkingLot.unParkVehicle(vehicle1);
+        boolean isUnParked = parkingLot.isUnParked();
+        assertTrue(isUnParked);
+    }
+
+    /*
+     * Test Case 4 - When given different vehicle to unpark should return false.
+     */
+    @Test
+    public void givenVehicleIfParked_AndGivenDifferentVehicleToUnPark_ShouldReturnFalse() throws ParkingLotException {
+        parkingLot.parkVehicle(vehicle1);
+        parkingLot.unParkVehicle(vehicle2);
+        boolean parkingStatus = parkingLot.isUnParked();
+        assertFalse(parkingStatus);
+    }
+
+    /*
+     * Test Case 5 - When given different vehicle to unpark should throw exception "No Such Vehicle Found"
+     */
+    @Test
+    public void givenVehicleToUnPark_WhenNotAvailable_ShouldThrowException() {
+        try {
+            parkingLot.parkVehicle(vehicle1);
+            parkingLot.unParkVehicle(vehicle2);
+        } catch (ParkingLotException e) {
+            System.out.println(e.message);
+            assertEquals("No Such Vehicle", e.message);
+        }
     }
 
     /**
      * UC3 : Put out the Full Sign
-     * Test Case 4 - when the parking lot is full, put out the full sign.
+     * Test Case 6 - when the parking lot is full, put out the full sign.
      */
     @Test
-    public void givenParkingLot_IfFull_ShouldShowFullSign() {
-        String parkingLotStatus = parkingLot.parkingLotStatus(vehicle);
-        assertEquals("Lot is Full", parkingLotStatus);
-    }
-
-    /*
-    Test Case 5 - when the parking lot is empty, show parking available.
-     */
-    @Test
-    public void givenParkingLot_IfEmpty_ShouldShowParkingAvailableSign() {
-        String parkingLotStatus = parkingLot.parkingLotStatus(null);
-        assertEquals("Parking Available", parkingLotStatus);
+    public void givenParkingLot_IfFull_ShouldThrowException_LotIsFull() {
+        try {
+            parkingLot.parkVehicle(vehicle1);
+            parkingLot.parkVehicle(vehicle2);
+        } catch (ParkingLotException e) {
+            System.out.println(e.message);
+            assertEquals("Parking Lot is Full", e.message);
+        }
     }
 }

@@ -1,61 +1,52 @@
 package com.bridgelabz;
 
 public class ParkingLot {
-    String vehicle;
+    private Object vehicle = null;
 
-    /*
-    Parameterised Constructor
+    /**
+     *  Method to park the Vehicle.
+     *  If the parking lot is null then the object will be initialized to the local object vehicle.
+     *  If the local object vehicle is not null then it will throw the exception.
+     *
+     * @param vehicle - We are passing the Object Vehicle
+     * @throws ParkingLotException - If the parking lot is != NULL then it will throw the Custom Exception as "Parking Lot is Full".
      */
-    public ParkingLot(String vehicle) {
+    public void parkVehicle(Object vehicle) throws ParkingLotException {
+        if (this.vehicle != null)
+            throw new ParkingLotException("Parking Lot is Full");
         this.vehicle = vehicle;
     }
 
-    public ParkingLot() {
-    }
-
     /**
-     * Method check if the driver is able to park the vehicle.
+     *  Method to Unpark the Vehicle.
+     *  If the vehicle is present in the parking lot then it will make the local Object to "null".
+     *  If the vehicle is not present then it will throw the Custom Exception.
      *
-     * @param vehicle - We are passing the String vehicle.
-     * @return - Method return FALSE if parking lot is full and unable to park the vehicle OR
-     * return TRUE if parking lot is empty and able to park vehicle.
+     * @param vehicle -  We are passing the Object Vehicle
+     * @throws ParkingLotException - If we are trying to unpark the different vehicle then it will throw the exception "No Such Vehicle"
      */
-    public boolean parkVehicle(String vehicle) {
-        if (this.vehicle != null) {
-            return false;
-        } else {
-            this.vehicle = vehicle;
-            return true;
-        }
-    }
-
-    /**
-     * Method to unpark the vehicle.
-     *
-     * @param vehicle - We are passing the String vehicle.
-     * @return - Method return FALSE if vehicle is not found OR
-     * will return TRUE if the vehicle found and is unparked.
-     */
-    public boolean unParkVehicle(String vehicle) {
-        if (this.vehicle.equals(vehicle)) {
+    public void unParkVehicle(Object vehicle) throws ParkingLotException {
+        if (vehicle != vehicle)
+            throw new ParkingLotException("No Such Vehicle");
+        if (this.vehicle != null && this.vehicle.equals(vehicle))
             this.vehicle = null;
-            return true;
-        }
-        return false;
     }
 
     /**
-     * Method to check availability of the parking lot.
+     *  Query Statement - Method to check if the vehicle is parked or not.
      *
-     * @param vehicle - We are passing the String vehicle.
-     * @return - If the lot is FULL it will return "Lot is Full" or
-     * If there is no vehicle it will return "Parking Available".
+     * @param vehicle -  We are passing the Object Vehicle
+     * @return -  Will return true if vehicle is parked.
      */
-    public String parkingLotStatus(String vehicle) {
-        if (this.vehicle == vehicle) {
-            return "Lot is Full";
-        }
-        return "Parking Available";
+    public boolean isParked(Object vehicle) {
+        return this.vehicle == vehicle;
+    }
+
+    /**
+     * Query Statement - Method to check if the vehicle is Unparked or not.
+     * @return - Will return true if the vehicle is Unparked and Object is null.
+     */
+    public boolean isUnParked() {
+        return this.vehicle == null;
     }
 }
-
