@@ -101,12 +101,11 @@ public class ParkingLotTest {
      * Test case 7 : When the parking lot is full then Owner should be notified.
      */
     @Test
-    public void givenVehicleToPark_WhenOwner_ShouldInformInformLotFull(){
+    public void givenVehicleToPark_WhenOwner_ShouldInformInformLotFull() {
         try {
-            parkingLot.addMonitor(owner);
             parkingLot.parkVehicle(vehicle1);
             parkingLot.parkVehicle(vehicle2);
-        } catch(ParkingLotException e) {
+        } catch (ParkingLotException e) {
             assertEquals("Parking Lot Is Full", owner.getMessage());
         }
     }
