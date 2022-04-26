@@ -101,12 +101,26 @@ public class ParkingLotTest {
      * Test case 7 : When the parking lot is full then Owner should be notified.
      */
     @Test
-    public void givenVehicleToPark_WhenOwner_ShouldInformInformLotFull() {
+    public void givenVehicleToPark_WhenLotFull_ShouldNotifyOwner() {
         try {
             parkingLot.parkVehicle(vehicle1);
             parkingLot.parkVehicle(vehicle2);
         } catch (ParkingLotException e) {
             assertEquals("Parking Lot Is Full", owner.getMessage());
+        }
+    }
+
+    /**
+     * UC4 : Notify To Airport Security
+     * Test case 8 : When the parking lot is full then notify the Airport Security .
+     */
+    @Test
+    public void givenVehicleToPark_WhenLotFull_ShouldNotifyAirportSecurity() {
+        try {
+            parkingLot.parkVehicle(vehicle1);
+            parkingLot.parkVehicle(vehicle2);
+        } catch (ParkingLotException e) {
+            assertEquals("Parking Lot Is Full", airportSecurity.getMessage());
         }
     }
 }
