@@ -11,6 +11,7 @@ public class ParkingLotTest {
     Object vehicle1 = null;
     Object vehicle2 = null;
     Owner owner = null;
+    AirportSecurity airportSecurity = null;
 
     //Setting up the objects.
     @BeforeEach
@@ -19,6 +20,7 @@ public class ParkingLotTest {
         vehicle1 = new Object();
         vehicle2 = new Object();
         owner = new Owner();
+        airportSecurity = new AirportSecurity();
     }
 
     /**

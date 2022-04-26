@@ -59,6 +59,8 @@ public class ParkingLot {
      */
     public void notifyToSystem() {
         Owner owner = new Owner();
+        AirportSecurity airportSecurity = new AirportSecurity();
         owner.updateMessage("Parking Lot Is Full");
+        airportSecurity.updateMessage("Parking Lot Is Full");
     }
 }
