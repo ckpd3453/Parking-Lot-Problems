@@ -4,6 +4,8 @@ package com.bridgelabz;
 public class ParkingLot {
     private Object vehicle = null;
 
+
+
     /**
      * Method to park the Vehicle.
      * If the parking lot is null then the object will be initialized to the local object vehicle.
@@ -18,6 +20,7 @@ public class ParkingLot {
             throw new ParkingLotException("Parking Lot Is Full");
         }
         this.vehicle = vehicle;
+        throw new ParkingLotException("isParked");
     }
 
     /**
@@ -61,9 +64,8 @@ public class ParkingLot {
      * Method To Update Message To The Concern Entities
      */
     public void notifyToSystem(String message) {
-        Owner owner = new Owner();
+        new Owner(message);
         AirportSecurity airportSecurity = new AirportSecurity();
-        owner.updateMessage(message);
         airportSecurity.updateMessage(message);
     }
 }
