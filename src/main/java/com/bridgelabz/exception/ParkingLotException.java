@@ -1,4 +1,4 @@
-package com.bridgelabz;
+package com.bridgelabz.exception;
 
 // Custom Exception Class
 public class ParkingLotException extends Exception {

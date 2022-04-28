@@ -1,4 +1,4 @@
-package com.bridgelabz;
+package com.bridgelabz.entity;
 
 /**
  *  Created class to notify the Airport Security when the parking lot is full.
