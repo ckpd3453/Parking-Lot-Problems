@@ -51,7 +51,7 @@ public class ParkingLotTest {
         assertTrue(isParked);
     }
 
-    /*
+    /**
      * UC2 : Unpark Vehicle
      * Test Case 3 - Able to Unpark the vehicle from the parking lot.
      */
@@ -212,7 +212,7 @@ public class ParkingLotTest {
     }
 
     /*
-        If driver unparks the car then the unpark method should return true.
+     *  Test case 14 : If driver unpark the car then the unpark method should return true.
      */
     @Test
     public void givenDriven_WhenFoundTheCar_ShouldUnparkTheCar_andReturnTrue() throws ParkingLotException {

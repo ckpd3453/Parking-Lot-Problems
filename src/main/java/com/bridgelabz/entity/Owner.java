@@ -24,9 +24,9 @@ public class Owner implements IParkingObserver {
     }
 
     /**
-     *  In this method we will check and generate the key to park the car.
-     *  We will return the key to the attendant to park the car.
-     *  We will increment the lot number and assign the key to it.
+     * In this method we will check and generate the key to park the car.
+     * We will return the key to the attendant to park the car.
+     * We will increment the lot number and assign the key to it.
      *
      * @param parkingMap -  we are passing the hash map here
      * @return - We will return the key to park the vehicle.
@@ -41,5 +41,12 @@ public class Owner implements IParkingObserver {
         }
         lotNumber++;
         return key;
+    }
+
+    /**
+     * Method to update the key value for further implementations.
+     */
+    public void updateUnParkedVehicle(int key) {
+        this.key = key;
     }
 }

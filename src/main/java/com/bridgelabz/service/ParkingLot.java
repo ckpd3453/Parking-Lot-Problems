@@ -13,6 +13,7 @@ import java.util.Map;
 public class ParkingLot {
     private final int PARKING_LOT_CAPACITY = 2;
     public final Map<Integer, Car> parkingMap = new HashMap<>();
+    Owner owner = new Owner();
     Attendant attendant = new Attendant();
 
     /**
@@ -38,24 +39,27 @@ public class ParkingLot {
 
     /**
      * Method to Unpark the Vehicle.
-     * We are checking if the Car id and if hash map key if equal,
-     * then the car is present and we are removing the car from the hash map.
+     * We are getting input as key to find the vehicle and if present,
+     * then will remove the key value from the hashmap.
      * And notifying the status of the parking lot to the authorised entity
      *
-     * @param car -  We are passing the car object.
-     * @throws ParkingLotException - We are checking the Car id and throwing the exception.
+     * @param key -  We are passing the key as parking lot number of object.
+     * @throws ParkingLotException - We are throwing the exception if found.
      */
-    public void unParkVehicle(Car car) throws ParkingLotException {
-        if (car == null)
+    public void unParkVehicle(int key) throws ParkingLotException {
+        if (key == 0)
             throw new ParkingLotException("No Such Vehicle");
         if (parkingMap.size() == 0)
             throw new ParkingLotException("Parking Lot Is Empty");
-        if (!parkingMap.containsKey(car.getID()))
+        if (!parkingMap.containsKey(key))
             throw new ParkingLotException("Wrong Vehicle");
-        if (this.parkingMap.size() <= PARKING_LOT_CAPACITY - 1)
+        if(this.parkingMap.size() <= PARKING_LOT_CAPACITY-1)
             notifyToSystem("Space Available");
-        parkingMap.remove(car.getID());
-        throw new ParkingLotException("Space Available");
+        if (parkingMap.containsKey(key)){
+            owner.updateUnParkedVehicle(key);
+            parkingMap.remove(key);
+            notifyToSystem("Vehicle Unparked");
+        }
     }
 
     /**
@@ -77,6 +81,21 @@ public class ParkingLot {
      */
     public boolean isUnParked(Car car) {
         return !parkingMap.containsKey(car.getID());
+    }
+
+    /**
+     * Method to find the lot number of the vehicle if parked in the parking lot.
+     * Iterating hashmap and equating each value of hashmap to the car if matched then return key as lot number of car.
+     *
+     * @param car - Passing car to find the key as parking lot number
+     * @return - Will return key as lot number if car present in the lot.
+     */
+    public int getVehicle(Car car) {
+        for (int key : parkingMap.keySet()) {
+            if (parkingMap.get(key) == car)
+                return key;
+        }
+        return 0;
     }
 
     /**
