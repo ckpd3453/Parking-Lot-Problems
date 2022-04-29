@@ -31,6 +31,7 @@ public class ParkingLot {
         if (this.parkingMap.size() < PARKING_LOT_CAPACITY) {
             Integer key = attendant.parkVehicle(parkingMap);
             parkingMap.put(key, car);
+            parkingTime(car);
             notifyToSystem("Space Available");
         } else if (this.parkingMap.size() >= PARKING_LOT_CAPACITY) {
             this.notifyToSystem("Parking Lot Is Full");
@@ -54,9 +55,9 @@ public class ParkingLot {
             throw new ParkingLotException("Parking Lot Is Empty");
         if (!parkingMap.containsKey(key))
             throw new ParkingLotException("Wrong Vehicle");
-        if(this.parkingMap.size() <= PARKING_LOT_CAPACITY-1)
+        if (this.parkingMap.size() <= PARKING_LOT_CAPACITY - 1)
             notifyToSystem("Space Available");
-        if (parkingMap.containsKey(key)){
+        if (parkingMap.containsKey(key)) {
             owner.updateUnParkedVehicle(key);
             parkingMap.remove(key);
             notifyToSystem("Vehicle Unparked");
@@ -107,5 +108,17 @@ public class ParkingLot {
         AirportSecurity airportSecurity = new AirportSecurity();
         owner.updateMessage(message);
         airportSecurity.updateMessage(message);
+    }
+
+    /**
+     * Method to get the time when the car was parked.
+     *
+     * @param car - We are passing the car object
+     * @return - Return the time when the car was parked
+     */
+    public LocalDateTime parkingTime(Car car) {
+        LocalDateTime time;
+        time = LocalDateTime.now();
+        return time.withNano(0);
     }
 }

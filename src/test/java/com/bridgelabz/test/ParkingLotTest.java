@@ -232,11 +232,11 @@ public class ParkingLotTest {
      * Test Case 15 : If a vehicle is parked in parking lot should return the parking time.
      */
     @Test
-    public void givenVehicle_whenParked_ShouldReturnParkingTime()throws ParkingLotException{
+    public void givenVehicle_whenParked_ShouldReturnParkingTime() throws ParkingLotException {
         parkingLot.parkVehicle(car1);
         LocalDateTime time;
         time = LocalDateTime.now();
         System.out.println(time.withNano(0));
-        assertEquals(time.withNano(0),parkingLot.parkingTime(car1));
+        assertEquals(time.withNano(0), parkingLot.parkingTime(car1));
     }
 }
