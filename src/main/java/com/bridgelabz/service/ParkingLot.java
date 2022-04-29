@@ -7,6 +7,7 @@ import com.bridgelabz.exception.ParkingLotException;
 import com.bridgelabz.entity.AirportSecurity;
 import com.bridgelabz.entity.Owner;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -107,5 +108,4 @@ public class ParkingLot {
         owner.updateMessage(message);
         airportSecurity.updateMessage(message);
     }
-
 }

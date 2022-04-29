@@ -8,6 +8,9 @@ import com.bridgelabz.service.ParkingLot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
@@ -224,4 +227,16 @@ public class ParkingLotTest {
         assertTrue(isUnParked);
     }
 
+    /**
+     * UC 8 : As a Owner want to know the parking Time so that I can charge lot users.
+     * Test Case 15 : If a vehicle is parked in parking lot should return the parking time.
+     */
+    @Test
+    public void givenVehicle_whenParked_ShouldReturnParkingTime()throws ParkingLotException{
+        parkingLot.parkVehicle(car1);
+        LocalDateTime time;
+        time = LocalDateTime.now();
+        System.out.println(time.withNano(0));
+        assertEquals(time.withNano(0),parkingLot.parkingTime(car1));
+    }
 }
