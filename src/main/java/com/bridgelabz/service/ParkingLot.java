@@ -48,7 +48,7 @@ public class ParkingLot {
      * @param key -  We are passing the key as parking lot number of object.
      * @throws ParkingLotException - We are throwing the exception if found.
      */
-    public void unParkVehicle(int key) throws ParkingLotException {
+    public void unParkVehicle(Integer key) throws ParkingLotException {
         if (key == 0)
             throw new ParkingLotException("No Such Vehicle");
         if (parkingMap.size() == 0)
@@ -82,7 +82,8 @@ public class ParkingLot {
      * @return - Will return true if the vehicle is Unparked
      */
     public boolean isUnParked(Car car) {
-        return !parkingMap.containsKey(car.getID());
+
+        return parkingMap.containsKey(car.getID());
     }
 
     /**
@@ -92,8 +93,8 @@ public class ParkingLot {
      * @param car - Passing car to find the key as parking lot number
      * @return - Will return key as lot number if car present in the lot.
      */
-    public int getVehicle(Car car) {
-        for (int key : parkingMap.keySet()) {
+    public Integer getVehicle(Car car) {
+        for (Integer key : parkingMap.keySet()) {
             if (parkingMap.get(key) == car)
                 return key;
         }

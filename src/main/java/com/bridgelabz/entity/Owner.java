@@ -9,7 +9,7 @@ import java.util.Map;
  * Created Class Owner To Notify When The Parking Lot Is Full.
  */
 public class Owner implements IParkingObserver {
-    int key;
+    Integer key;
     int lotNumber = 1;
     public static String message;
 
@@ -46,7 +46,7 @@ public class Owner implements IParkingObserver {
     /**
      * Method to update the key value for further implementations.
      */
-    public void updateUnParkedVehicle(int key) {
+    public void updateUnParkedVehicle(Integer key) {
         this.key = key;
     }
 }

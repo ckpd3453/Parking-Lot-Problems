@@ -89,7 +89,6 @@ public class ParkingLotTest {
      */
     @Test
     public void givenVehicleToUnPark_WhenNotAvailable_ShouldThrowException() {
-        Car car2 = null;
         try {
             parkingLot.parkVehicle(car1);
             int key = parkingLot.getVehicle(car2);
@@ -194,7 +193,7 @@ public class ParkingLotTest {
      * Test case 12 - Getting the lot number so that the driver can unpark the car.
      */
     @Test
-    public void givenDriven_WhenFoundTheCar_shouldReturnLotNumber() throws ParkingLotException {
+    public void givenDriver_WhenFoundTheCar_shouldReturnLotNumber() throws ParkingLotException {
         parkingLot.parkVehicle(car1);
         parkingLot.parkVehicle(car2);
         int lotNumber = parkingLot.getVehicle(car2);
@@ -205,7 +204,7 @@ public class ParkingLotTest {
      * Test case 13 : When the lot number is provided the driver should unpark the car.
      */
     @Test
-    public void givenDriven_WhenFoundTheCar_ShouldUnparkTheCar() throws ParkingLotException {
+    public void givenDriver_WhenFoundTheCar_ShouldUnparkTheCar() throws ParkingLotException {
         parkingLot.parkVehicle(car1);
         parkingLot.parkVehicle(car2);
         int key = parkingLot.getVehicle(car2);
@@ -218,7 +217,7 @@ public class ParkingLotTest {
      *  Test case 14 : If driver unpark the car then the unpark method should return true.
      */
     @Test
-    public void givenDriven_WhenFoundTheCar_ShouldUnparkTheCar_andReturnTrue() throws ParkingLotException {
+    public void givenDriver_WhenFoundTheCar_ShouldUnparkTheCar_andReturnTrue() throws ParkingLotException {
         parkingLot.parkVehicle(car1);
         parkingLot.parkVehicle(car2);
         int key = parkingLot.getVehicle(car2);
@@ -238,5 +237,29 @@ public class ParkingLotTest {
         time = LocalDateTime.now();
         System.out.println(time.withNano(0));
         assertEquals(time.withNano(0), parkingLot.parkingTime(car1));
+    }
+
+    /**
+     * UC 9 : Evenly Distribution
+     * Test Case 16 : Given Cars should be parked evenly in the parking lot.
+     */
+    @Test
+    public void givenCar_ShouldBeParked_WithEvenDistribution() throws ParkingLotException {
+        parkingLot.parkVehicle(car1);                // parked the vehicle  lotNumber == 1
+        int key1 = parkingLot.getVehicle(car1);
+
+        parkingLot.parkVehicle(car2);
+        int key2 = parkingLot.getVehicle(car2);      // parked the vehicle  lotNumber == 2
+        parkingLot.unParkVehicle(key2);              //unparked vehicle Lot number 2 = null
+
+        parkingLot.parkVehicle(car3);                // parked the vehicle  lotNumber == 2
+        int key3 = parkingLot.getVehicle(car3);
+
+        parkingLot.unParkVehicle(key1);              // unparked the vehicle lot number 1 == null
+
+        parkingLot.parkVehicle(car4);                //parked vehicle lot number == 1
+        int key5 = parkingLot.getVehicle(car4);
+
+        assertEquals(key1,key5);
     }
 }
