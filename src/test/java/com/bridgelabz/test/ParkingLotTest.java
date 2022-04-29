@@ -60,12 +60,13 @@ public class ParkingLotTest {
      */
     @Test
     public void givenVehicleIfParked_WhenUnParked_ShouldReturnTrue() throws ParkingLotException {
+        int key = 0;
         try {
             parkingLot.parkVehicle(car1);
-            int key = parkingLot.getVehicle(car1);
+            key = parkingLot.getVehicle(car1);
             parkingLot.unParkVehicle(key);
         } catch (ParkingLotException e) {
-            boolean isUnParked = parkingLot.isUnParked(car1);
+            boolean isUnParked = parkingLot.isUnParked(key);
             assertTrue(isUnParked);
         }
     }
@@ -222,7 +223,7 @@ public class ParkingLotTest {
         parkingLot.parkVehicle(car2);
         int key = parkingLot.getVehicle(car2);
         parkingLot.unParkVehicle(key);
-        boolean isUnParked = parkingLot.isUnParked(car2);
+        boolean isUnParked = parkingLot.isUnParked(key);
         assertTrue(isUnParked);
     }
 
@@ -260,6 +261,6 @@ public class ParkingLotTest {
         parkingLot.parkVehicle(car4);                //parked vehicle lot number == 1
         int key5 = parkingLot.getVehicle(car4);
 
-        assertEquals(key1,key5);
+        assertEquals(key1, key5);
     }
 }

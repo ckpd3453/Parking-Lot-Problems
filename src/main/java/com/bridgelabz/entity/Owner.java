@@ -36,6 +36,10 @@ public class Owner implements IParkingObserver {
             this.key = lotNumber;
         for (Integer key : parkingMap.keySet()) {
             this.key = key;
+            if (parkingMap.get(key) == null) {
+                this.key = key;
+                return this.key;
+            }
             if (!parkingMap.get(key).equals(key))
                 this.key = lotNumber;
         }

@@ -28,7 +28,7 @@ public class ParkingLot {
      *                             If the hash map size is greater then we will throw exception as "Parking Lot Is Full".
      */
     public void parkVehicle(Car car) throws ParkingLotException {
-        if (this.parkingMap.size() < PARKING_LOT_CAPACITY) {
+        if (this.parkingMap.size() < PARKING_LOT_CAPACITY || parkingMap.containsValue(null)) {
             Integer key = attendant.parkVehicle(parkingMap);
             parkingMap.put(key, car);
             parkingTime(car);
@@ -59,7 +59,7 @@ public class ParkingLot {
             notifyToSystem("Space Available");
         if (parkingMap.containsKey(key)) {
             owner.updateUnParkedVehicle(key);
-            parkingMap.remove(key);
+            parkingMap.put(key, null);
             notifyToSystem("Vehicle Unparked");
         }
     }
@@ -77,13 +77,13 @@ public class ParkingLot {
 
     /**
      * Query Statement - Method to check if the vehicle is Unparked or not.
-     * If the Hash map key does not contains car id then the car is Unparked and will return true.
+     * If in the HashMap the given car value is null then the car is Unparked and will return true.
      *
      * @return - Will return true if the vehicle is Unparked
      */
-    public boolean isUnParked(Car car) {
+    public boolean isUnParked(int key) {
 
-        return parkingMap.containsKey(car.getID());
+        return parkingMap.get(key) == null;
     }
 
     /**
