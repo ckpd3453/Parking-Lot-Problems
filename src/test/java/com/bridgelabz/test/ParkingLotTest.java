@@ -59,7 +59,8 @@ public class ParkingLotTest {
     public void givenVehicleIfParked_WhenUnParked_ShouldReturnTrue() throws ParkingLotException {
         try {
             parkingLot.parkVehicle(car1);
-            parkingLot.unParkVehicle(car1);
+            int key = parkingLot.getVehicle(car1);
+            parkingLot.unParkVehicle(key);
         } catch (ParkingLotException e) {
             boolean isUnParked = parkingLot.isUnParked(car1);
             assertTrue(isUnParked);
@@ -73,9 +74,10 @@ public class ParkingLotTest {
     public void givenVehicleIfParked_AndGivenDifferentVehicleToUnPark_ShouldThrowException() {
         try {
             parkingLot.parkVehicle(car1);
-            parkingLot.unParkVehicle(car2);
+            int key = parkingLot.getVehicle(car2);
+            parkingLot.unParkVehicle(key);
         } catch (ParkingLotException e) {
-            assertEquals("Wrong Vehicle", e.message);
+            assertEquals("No Such Vehicle", e.message);
         }
     }
 
@@ -87,7 +89,8 @@ public class ParkingLotTest {
         Car car2 = null;
         try {
             parkingLot.parkVehicle(car1);
-            parkingLot.unParkVehicle(car2);
+            int key = parkingLot.getVehicle(car2);
+            parkingLot.unParkVehicle(key);
         } catch (ParkingLotException e) {
             assertEquals("No Such Vehicle", e.message);
         }
@@ -147,8 +150,10 @@ public class ParkingLotTest {
         try {
             parkingLot.parkVehicle(car1);
             parkingLot.parkVehicle(car2);
-            parkingLot.unParkVehicle(car1);
-            parkingLot.unParkVehicle(car2);
+            int key = parkingLot.getVehicle(car1);
+            parkingLot.unParkVehicle(key);
+            int key1 = parkingLot.getVehicle(car2);
+            parkingLot.unParkVehicle(key1);
             parkingLot.parkVehicle(car3);
         } catch (ParkingLotException e) {
             assertEquals("Space Available", owner.getMessage());
@@ -180,4 +185,43 @@ public class ParkingLotTest {
             assertEquals("Parking Lot Is Full", owner.getMessage());
         }
     }
+
+    /**
+     * UC 7 : As a driver I want to find the car so that I can go home.
+     * Test case 12 - Getting the lot number so that the driver can unpark the car.
+     */
+    @Test
+    public void givenDriven_WhenFoundTheCar_shouldReturnLotNumber() throws ParkingLotException {
+        parkingLot.parkVehicle(car1);
+        parkingLot.parkVehicle(car2);
+        int lotNumber = parkingLot.getVehicle(car2);
+        assertEquals(2, lotNumber);
+    }
+
+    /*
+     * Test case 13 : When the lot number is provided the driver should unpark the car.
+     */
+    @Test
+    public void givenDriven_WhenFoundTheCar_ShouldUnparkTheCar() throws ParkingLotException {
+        parkingLot.parkVehicle(car1);
+        parkingLot.parkVehicle(car2);
+        int key = parkingLot.getVehicle(car2);
+        parkingLot.unParkVehicle(key);
+        assertEquals("Vehicle Unparked", owner.getMessage());
+
+    }
+
+    /*
+        If driver unparks the car then the unpark method should return true.
+     */
+    @Test
+    public void givenDriven_WhenFoundTheCar_ShouldUnparkTheCar_andReturnTrue() throws ParkingLotException {
+        parkingLot.parkVehicle(car1);
+        parkingLot.parkVehicle(car2);
+        int key = parkingLot.getVehicle(car2);
+        parkingLot.unParkVehicle(key);
+        boolean isUnParked = parkingLot.isUnParked(car2);
+        assertTrue(isUnParked);
+    }
+
 }

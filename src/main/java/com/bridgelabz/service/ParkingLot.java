@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class ParkingLot {
     private final int PARKING_LOT_CAPACITY = 2;
-    private final Map<Integer, Car> parkingMap = new HashMap<>();
+    public final Map<Integer, Car> parkingMap = new HashMap<>();
     Attendant attendant = new Attendant();
 
     /**
@@ -22,17 +22,15 @@ public class ParkingLot {
      *
      * @param car - We are passing the car
      * @throws ParkingLotException - If the hash map size is less that the parking lot capacity,
-     * then we will add the car to the hash map and park the vehicle and throw exception "Space Available".
-     * If the hash map size is greater then we will throw exception as "Parking Lot Is Full".
-     *
+     *                             then we will add the car to the hash map and park the vehicle and throw exception "Space Available".
+     *                             If the hash map size is greater then we will throw exception as "Parking Lot Is Full".
      */
     public void parkVehicle(Car car) throws ParkingLotException {
         if (this.parkingMap.size() < PARKING_LOT_CAPACITY) {
             Integer key = attendant.parkVehicle(parkingMap);
             parkingMap.put(key, car);
-            this.notifyToSystem("Space Available");
-        }
-        else if (this.parkingMap.size() >= PARKING_LOT_CAPACITY) {
+            notifyToSystem("Space Available");
+        } else if (this.parkingMap.size() >= PARKING_LOT_CAPACITY) {
             this.notifyToSystem("Parking Lot Is Full");
             throw new ParkingLotException("Parking Lot Is Full");
         }
@@ -54,11 +52,10 @@ public class ParkingLot {
             throw new ParkingLotException("Parking Lot Is Empty");
         if (!parkingMap.containsKey(car.getID()))
             throw new ParkingLotException("Wrong Vehicle");
-        if(this.parkingMap.size() <= PARKING_LOT_CAPACITY-1)
+        if (this.parkingMap.size() <= PARKING_LOT_CAPACITY - 1)
             notifyToSystem("Space Available");
         parkingMap.remove(car.getID());
         throw new ParkingLotException("Space Available");
-
     }
 
     /**
@@ -91,4 +88,5 @@ public class ParkingLot {
         owner.updateMessage(message);
         airportSecurity.updateMessage(message);
     }
+
 }

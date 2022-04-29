@@ -1,12 +1,14 @@
 package com.bridgelabz.entity;
 
+import com.bridgelabz.IParkingObserver;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created Class Owner To Notify When The Parking Lot Is Full.
  */
-public class Owner{
+public class Owner implements IParkingObserver {
     int key;
     int lotNumber = 1;
     public static String message;
@@ -40,5 +42,4 @@ public class Owner{
         lotNumber++;
         return key;
     }
-
 }
