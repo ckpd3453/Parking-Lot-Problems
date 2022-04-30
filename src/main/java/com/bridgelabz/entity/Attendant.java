@@ -6,6 +6,10 @@ import java.util.Map;
  * Class attendant is taken as entity which follows the instruction of the owner to park the vehicle.
  */
 public class Attendant {
+
+    public Attendant() {
+    }
+
     Owner owner = new Owner();
 
     /**

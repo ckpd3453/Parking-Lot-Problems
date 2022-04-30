@@ -1,18 +1,15 @@
 package com.bridgelabz.service;
 
 
-import com.bridgelabz.entity.Attendant;
-import com.bridgelabz.entity.Car;
+import com.bridgelabz.entity.*;
 import com.bridgelabz.exception.ParkingLotException;
-import com.bridgelabz.entity.AirportSecurity;
-import com.bridgelabz.entity.Owner;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingLot {
-    private final int PARKING_LOT_CAPACITY = 2;
+    public int PARKING_LOT_CAPACITY = 2;
     public final Map<Integer, Car> parkingMap = new HashMap<>();
     Owner owner = new Owner();
     Attendant attendant = new Attendant();
@@ -28,6 +25,7 @@ public class ParkingLot {
      *                             If the hash map size is greater then we will throw exception as "Parking Lot Is Full".
      */
     public void parkVehicle(Car car) throws ParkingLotException {
+
         if (this.parkingMap.size() < PARKING_LOT_CAPACITY || parkingMap.containsValue(null)) {
             Integer key = attendant.parkVehicle(parkingMap);
             parkingMap.put(key, car);

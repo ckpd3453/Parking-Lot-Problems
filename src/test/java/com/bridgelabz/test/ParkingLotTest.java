@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -262,5 +261,24 @@ public class ParkingLotTest {
         int key5 = parkingLot.getVehicle(car4);
 
         assertEquals(key1, key5);
+    }
+
+    /**
+     * UC 10 : As a Handicap Driver I want Parking Attendant to Park my Car at nearest parking lot.
+     * <p>
+     * Test Case 17 : Evenly Parked Vehicle on the basis of Handicap Driver(Nearest Space) And Normal Driver.
+     */
+    @Test
+    public void givenTypeOfDriver_ShouldParkCar_InTheirLotCategory() throws ParkingLotException {
+
+        parkingLot.parkingReservationType(car1, ParkingDistribution.HANDICAP);
+        int vehicle1 = parkingLot.getVehicle(car1);
+        parkingLot.parkingReservationType(car2, ParkingDistribution.GENERAL);
+        int vehicle2 = parkingLot.getVehicle(car2);
+        parkingLot.parkingReservationType(car3, ParkingDistribution.GENERAL);
+        int vehicle3 = parkingLot.getVehicle(car3);
+        System.out.println(vehicle1 + "," + vehicle2);
+        assertEquals(3, vehicle2);
+
     }
 }

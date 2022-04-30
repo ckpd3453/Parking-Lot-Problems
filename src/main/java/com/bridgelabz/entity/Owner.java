@@ -10,7 +10,13 @@ import java.util.Map;
  */
 public class Owner implements IParkingObserver {
     Integer key;
+
+    public Owner() {
+
+    }
+
     int lotNumber = 1;
+
     public static String message;
 
     //Method to update the message passed.
