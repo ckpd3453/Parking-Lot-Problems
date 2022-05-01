@@ -10,13 +10,12 @@ import java.util.Map;
  */
 public class Owner implements IParkingObserver {
     Integer key;
+    int handicapLotNumber = 1;
+    int generalLotNumber = 3;
 
     public Owner() {
 
     }
-
-    int lotNumber = 1;
-
     public static String message;
 
     //Method to update the message passed.
@@ -30,7 +29,7 @@ public class Owner implements IParkingObserver {
     }
 
     /**
-     * In this method we will check and generate the key to park the car.
+     * In this method we will check and generate the key to park the car for handicap user.
      * We will return the key to the attendant to park the car.
      * We will increment the lot number and assign the key to it.
      *
@@ -39,7 +38,7 @@ public class Owner implements IParkingObserver {
      */
     public Integer allocateSpaceToPark(Map<Integer, Car> parkingMap) {
         if (parkingMap.size() == 0)
-            this.key = lotNumber;
+            this.key = handicapLotNumber;
         for (Integer key : parkingMap.keySet()) {
             this.key = key;
             if (parkingMap.get(key) == null) {
@@ -47,9 +46,33 @@ public class Owner implements IParkingObserver {
                 return this.key;
             }
             if (!parkingMap.get(key).equals(key))
-                this.key = lotNumber;
+                this.key = handicapLotNumber;
         }
-        lotNumber++;
+        handicapLotNumber++;
+        return key;
+    }
+
+    /**
+     * In this method we will check and generate the key to park the  for normal user..
+     * We will return the key to the attendant to park the car.
+     * We will increment the lot number and assign the key to it.
+     *
+     * @param parkingMap -  we are passing the hash map here
+     * @return - We will return the key to park the vehicle.
+     */
+    public Integer allocateSpaceToGeneral(Map<Integer, Car> parkingMap) {
+        if (parkingMap.size() <= 2)
+            this.key = generalLotNumber;
+        for (Integer key : parkingMap.keySet()) {
+            this.key = key;
+            if (parkingMap.get(key) == null) {
+                this.key = key;
+                return this.key;
+            }
+            if (!parkingMap.get(key).equals(key))
+                this.key = generalLotNumber;
+        }
+        generalLotNumber++;
         return key;
     }
 

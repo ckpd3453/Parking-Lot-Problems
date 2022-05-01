@@ -3,6 +3,7 @@ package com.bridgelabz.test;
 import com.bridgelabz.entity.AirportSecurity;
 import com.bridgelabz.entity.Car;
 import com.bridgelabz.entity.Owner;
+import com.bridgelabz.enums.ParkingDistribution;
 import com.bridgelabz.exception.ParkingLotException;
 import com.bridgelabz.service.ParkingLot;
 import org.junit.jupiter.api.BeforeEach;
@@ -265,7 +266,7 @@ public class ParkingLotTest {
 
     /**
      * UC 10 : As a Handicap Driver I want Parking Attendant to Park my Car at nearest parking lot.
-     * <p>
+     *
      * Test Case 17 : Evenly Parked Vehicle on the basis of Handicap Driver(Nearest Space) And Normal Driver.
      */
     @Test

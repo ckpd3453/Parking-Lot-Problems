@@ -2,6 +2,7 @@ package com.bridgelabz.service;
 
 
 import com.bridgelabz.entity.*;
+import com.bridgelabz.enums.ParkingDistribution;
 import com.bridgelabz.exception.ParkingLotException;
 
 import java.time.LocalDateTime;
@@ -27,10 +28,17 @@ public class ParkingLot {
     public void parkVehicle(Car car) throws ParkingLotException {
 
         if (this.parkingMap.size() < PARKING_LOT_CAPACITY || parkingMap.containsValue(null)) {
-            Integer key = attendant.parkVehicle(parkingMap);
-            parkingMap.put(key, car);
-            parkingTime(car);
-            notifyToSystem("Space Available");
+            if(PARKING_LOT_CAPACITY == 2) {
+                Integer key = attendant.handicapParkVehicle(parkingMap);
+                parkingMap.put(key, car);
+                parkingTime(car);
+                notifyToSystem("Space Available");
+            }else {
+                Integer key = attendant.generalParkVehicle(parkingMap);
+                parkingMap.put(key, car);
+                parkingTime(car);
+                notifyToSystem("Space Available");
+            }
         } else if (this.parkingMap.size() >= PARKING_LOT_CAPACITY) {
             this.notifyToSystem("Parking Lot Is Full");
             throw new ParkingLotException("Parking Lot Is Full");
@@ -119,5 +127,29 @@ public class ParkingLot {
         LocalDateTime time;
         time = LocalDateTime.now();
         return time.withNano(0);
+    }
+
+    /**
+     * Method to identify the reservation type.
+     *
+     * @param car - We are passing the car to park the vehicle
+     * @param type - We will get the enum type as handicap or normal user
+     * @throws ParkingLotException - It will throw exception if any.
+     */
+    public void parkingReservationType(Car car, ParkingDistribution type) throws ParkingLotException {
+        if(ParkingDistribution.HANDICAP == type){
+            if(parkingMap.size() < ParkingDistribution.HANDICAP.lot){
+                PARKING_LOT_CAPACITY = ParkingDistribution.HANDICAP.lot;
+                parkVehicle(car);
+            } else {
+                PARKING_LOT_CAPACITY = ParkingDistribution.GENERAL.lot;
+                parkVehicle(car);
+                throw new ParkingLotException("Handicap Reservation Lot Is Full Please Park The Car In General Lot If Free");
+            }
+        }
+        if (ParkingDistribution.GENERAL == type){
+            PARKING_LOT_CAPACITY = ParkingDistribution.GENERAL.lot;
+            parkVehicle(car);
+        }
     }
 }

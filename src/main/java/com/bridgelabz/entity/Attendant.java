@@ -11,14 +11,23 @@ public class Attendant {
     }
 
     Owner owner = new Owner();
-
     /**
-     * Method park vehicle will call the owner class to get the key number.
+     * Method park vehicle will call the owner class to get the key number for the handicap user.
      *
      * @param parkingMap - Passing the hash map
      * @return - will return the key generated from the owner.
      */
-    public Integer parkVehicle(Map<Integer, Car> parkingMap) {
+    public Integer handicapParkVehicle(Map<Integer, Car> parkingMap) {
         return owner.allocateSpaceToPark(parkingMap);
+    }
+
+    /**
+     * Method park vehicle will call the owner class to get the key number for normal user.
+     *
+     * @param parkingMap - Passing the hash map
+     * @return - will return the key generated from the owner.
+     */
+    public Integer generalParkVehicle(Map<Integer, Car> parkingMap) {
+        return owner.allocateSpaceToGeneral(parkingMap);
     }
 }
